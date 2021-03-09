@@ -6,7 +6,9 @@ import { apiKey } from "./apiKey";
 //     &videoEmbeddable=true
 
 function App() {
-  const [videoList, setList] = useState([]);
+  const [videoList, setList] = useState({
+    items: [{ id: { videoId: "9E6b3swbnWg" } }],
+  });
   const submitSearch = () => {
     fetch(
       `https://www.googleapis.com/youtube/v3/search?part=snippet
@@ -16,8 +18,8 @@ function App() {
     &key=${apiKey}`
     )
       .then((response) => response.json())
-      .then((data) => setList(data))
-      .then(() => console.log(videoList));
+      .then((data) => setList(data));
+    // .then(() => console.log(videoList));
   };
   useEffect(submitSearch, []);
 
