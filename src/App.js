@@ -3,10 +3,8 @@ import Header from "./components/Header";
 import Display from "./components/Display";
 import { apiKey } from "./apiKey";
 
-//     &videoEmbeddable=true
-
 function App() {
-  const [videoList, setList] = useState({
+  const [videos, setVideos] = useState({
     items: [{ id: { videoId: "9E6b3swbnWg" } }],
   });
   const submitSearch = () => {
@@ -18,15 +16,15 @@ function App() {
     &key=${apiKey}`
     )
       .then((response) => response.json())
-      .then((data) => setList(data));
-    // .then(() => console.log(videoList));
+      .then((data) => setVideos(data));
+    // .then(() => console.log(videos));
   };
   useEffect(submitSearch, []);
 
   return (
     <div className="App">
       <Header searchHandler={submitSearch} />
-      <Display videoList={videoList} />
+      <Display videos={videos} />
     </div>
   );
 }
