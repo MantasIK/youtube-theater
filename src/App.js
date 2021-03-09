@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "./components/Header";
 import Display from "./components/Display";
 import { apiKey } from "./apiKey";
@@ -7,19 +8,22 @@ function App() {
   const [videos, setVideos] = useState({
     items: [{ id: { videoId: "9E6b3swbnWg" } }],
   });
+
   const submitSearch = () => {
-    fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet
-    &q=chopin+nocturne-No.2
-    &type=video
-    &embedabble=true
-    &key=${apiKey}`
-    )
-      .then((response) => response.json())
-      .then((data) => setVideos(data));
-    // .then(() => console.log(videos));
+    axios
+      .get("https://www.googleapis.com/youtube/v3/search", {
+        params: {
+          part: "snippet",
+          q: "chopin+nocturne-No.2",
+          type: "video",
+          maxResults: 10,
+          embedabble: "true",
+          key: apiKey,
+        },
+      })
+      .then((response) => setVideos(response.data));
   };
-  useEffect(submitSearch, []);
+  useEffect(submitSearch, [videos]);
 
   return (
     <div className="App">

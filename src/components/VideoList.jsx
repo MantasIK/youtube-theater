@@ -1,6 +1,6 @@
 // import { useState, useEffect } from "react";
 import ReactPlayer from "react-player/youtube";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 
 function VideoList(props) {
   //   const [videoList, setList] = useState(props.videoList);
@@ -9,10 +9,12 @@ function VideoList(props) {
   return (
     <Container id="displayContainer">
       {
-        <Row /*className="displayRow"*/>
-          {props.videos.items.map((video) => {
-            <Col xs>{video.snippet.thumbnails.medium.url}</Col>;
-          })}
+        <Row className="displayRow" md="4">
+          {props.videos.items.map((video) => (
+            <Col xs>
+              <Image src={video.snippet.thumbnails.medium.url} />
+            </Col>
+          ))}
         </Row>
       }
     </Container>
