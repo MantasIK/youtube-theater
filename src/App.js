@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Header from "./components/Header";
 import Display from "./components/Display";
-import { apiKey } from "./apiKey";
+import { apiKey } from "./apiKey"; // comment this out if you placed your youtube api key directly into the axios key space
 
 function App() {
   const [videos, setVideos] = useState({
@@ -18,7 +18,7 @@ function App() {
           type: "video",
           maxResults: 10,
           embedabble: "true",
-          key: apiKey,
+          key: apiKey, // you can paste your api key directly in here, but comment out the import at the top
         },
       })
       .then((response) => setVideos(response.data));
