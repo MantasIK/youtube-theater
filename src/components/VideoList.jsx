@@ -1,24 +1,30 @@
-// import { useState, useEffect } from "react";
-import ReactPlayer from "react-player/youtube";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image, OverlayTrigger, Popover } from "react-bootstrap";
+import { renderInfo } from "./infoPopOver";
 
-function VideoList(props) {
-  //   const [videoList, setList] = useState(props.videoList);
-  //   useEffect(setList(props.videoList), []);
-  console.log(props.videos);
-  return (
-    <Container id="displayContainer">
-      {
-        <Row className="displayRow" md="4">
-          {props.videos.items.map((video) => (
-            <Col xs>
-              <Image src={video.snippet.thumbnails.medium.url} />
-            </Col>
-          ))}
-        </Row>
-      }
-    </Container>
-  );
-}
+const VideoList = (props) => (
+  <Row className="thumbnailRow">
+    {props.videos.items.map((video) => (
+      <Col
+        xs="auto"
+        sm="5"
+        md="3"
+        lg="3"
+        xl="auto"
+        id="thumbnailCol"
+        key={video.etag}
+        onClick={() => props.changeVideo(video.id.videoId)}
+      >
+        <OverlayTrigger
+          placement="top"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderInfo(video)}
+        >
+          <Image src={video.snippet.thumbnails.medium.url} />
+        </OverlayTrigger>
+        <Row className="descriptionRow"></Row>
+      </Col>
+    ))}
+  </Row>
+);
 
 export default VideoList;

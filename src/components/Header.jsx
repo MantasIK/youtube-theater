@@ -7,20 +7,24 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 
-function Header(props) {
+const Header = (props) => {
   const [searchInput, setInput] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.searchHandler(searchInput);
+  };
 
   return (
     <header className="header">
       <Container>
         <Row className="headerRow">
           <h1>Youtube Theater</h1>
+        </Row>
+        <form onSubmit={handleSubmit}>
           <InputGroup className="mb-3">
             <InputGroup.Prepend>
-              <Button
-                variant="secondary"
-                onClick={() => props.searchHandler(searchInput)}
-              >
+              <Button type="submit" variant="secondary">
                 Search
               </Button>
             </InputGroup.Prepend>
@@ -29,10 +33,10 @@ function Header(props) {
               onChange={(e) => setInput(e.target.value)}
             />
           </InputGroup>
-        </Row>
+        </form>
       </Container>
     </header>
   );
-}
+};
 
 export default Header;

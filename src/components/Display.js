@@ -1,31 +1,31 @@
-// import { useState, useEffect } from "react";
+import { useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import { Container, Row, Col } from "react-bootstrap";
 import VideoList from "./VideoList";
-import spinner from "../spinner.gif";
 
-function Display(props) {
-  //   const [videoList, setList] = useState(props.videoList);
-  //   useEffect(setList(props.videoList), []);
+const Display = (props) => {
+  const [currentVideo, setVideo] = useState("9E6b3swbnWg");
+  const changeVideo = (video) => {
+    setVideo(video);
+  };
 
   return (
     <Container id="displayContainer">
       <Row className="displayRow">
-        <Col lg="auto">
+        <Col lg="auto" id="displayCol">
           <ReactPlayer
+            playing={true}
             light
             controls={true}
-            url={`https://www.youtube.com/watch?v=${props.videos.items[0].id.videoId}`}
+            url={`https://www.youtube.com/watch?v=${currentVideo}`}
           />
         </Col>
       </Row>
       {props.videos.items[1] ? (
-        <Row>
-          <VideoList videos={props.videos} />
-        </Row>
+        <VideoList videos={props.videos} changeVideo={changeVideo} />
       ) : null}
     </Container>
   );
-}
+};
 
 export default Display;
