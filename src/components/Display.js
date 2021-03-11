@@ -6,7 +6,7 @@ import VideoList from "./VideoList";
 const Display = (props) => {
   const [currentVideo, setVideo] = useState("9E6b3swbnWg");
   const changeVideo = (video) => {
-    window.scrollTo({ top: 0, left: 0 });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     setVideo(video);
   };
 
