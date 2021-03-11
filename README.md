@@ -12,4 +12,6 @@ To try it out you need a **youtube api key** from _Google_.
 - run `npm start` for the dev server
 - **Listen to Chopin before you search anything**
 
+**Demo:** http://youtube-theater.s3-website-us-east-1.amazonaws.com/
+
 ![preview](./preview.gif)
